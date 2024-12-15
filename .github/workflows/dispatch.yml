@@ -1,0 +1,23 @@
+name: Trigger Release Workflow
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  trigger_workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Release Workflow
+        env:
+          PAT: ${{ secrets.PAT_GITHUB }}
+          EVENT_TYPE: release-cxxlibsample
+          TAG_NAME: ${{ github.ref }}
+        run: |
+          run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $PAT" \
+            https://api.github.com/repos/NakaokaRei/SwiftPackageXCFrameworkSample/dispatches \
+            -d '{"event_type": "'"$EVENT_TYPE"'", "client_payload": {"tag": "'"$TAG_NAME"'"}}'

@@ -33,9 +33,6 @@ mkdir -p "$IOS_ARM64_BUILD_DIR" "$IOS_SIM_ARM64_BUILD_DIR" "$XCFRAMEWORK_DIR"
 # 共通設定
 CMAKE_OPTIONS="-DCMAKE_BUILD_TYPE=Release"
 
-# C++標準（必要に応じて変更）
-CMAKE_OPTIONS="$CMAKE_OPTIONS -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_STANDARD_REQUIRED=YES"
-
 # ヘッダーファイルのパス（必要に応じて変更）
 HEADERS_DIR="$SCRIPT_DIR/include"
 
@@ -61,11 +58,9 @@ cmake -G Xcode \
 
 cmake --build "$IOS_SIM_ARM64_BUILD_DIR" --config Release
 
-# ビルドされたライブラリのパスを設定
 IOS_ARM64_LIB="$IOS_ARM64_BUILD_DIR/Release-iphoneos/lib${PROJECT_NAME}.a"
 IOS_SIM_ARM64_LIB="$IOS_SIM_ARM64_BUILD_DIR/Release-iphonesimulator/lib${PROJECT_NAME}.a"
 
-# XCFramework作成の前に存在確認
 if [ ! -f "$IOS_ARM64_LIB" ]; then
     echo "エラー: $IOS_ARM64_LIB が存在しません。ビルドが成功したか確認してください。"
     exit 1

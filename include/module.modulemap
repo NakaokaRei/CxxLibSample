@@ -1,0 +1,4 @@
+module CxxLibSample {
+    header "sample.h"
+    export *
+}

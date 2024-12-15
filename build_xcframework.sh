@@ -54,7 +54,7 @@ cmake --build "$IOS_ARM64_BUILD_DIR" --config Release
 echo "iOSシミュレータ（arm64）向けにビルド中..."
 cmake -G Xcode \
     -DCMAKE_TOOLCHAIN_FILE="$SCRIPT_DIR/$IOS_CMAKE_DIR/ios.toolchain.cmake" \
-    -DPLATFORM=SIMULATOR64 \
+    -DPLATFORM=SIMULATORARM64 \
     $CMAKE_OPTIONS \
     -B "$IOS_SIM_ARM64_BUILD_DIR" \
     -S "$SCRIPT_DIR"
